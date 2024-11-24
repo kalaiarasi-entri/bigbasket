@@ -4,14 +4,30 @@ try {
         throw new Error("Please run on browser. Prompt function is not available in this enivironmnet");
     }
 
-    // Get value of username and purchase amount
-    const customerName = prompt("Enter your name:");
-    const amount = parseFloat(prompt("Enter your purchase amount:"));
+    let customerName;
+    let amount;
 
-    //check entered amount and name is valid
-    if (isNaN(amount) || amount <= 0 || !customerName.trim()) {
-       alert("Invalid input. Please enter a valid name and purchase amount.");
+    // Get value of username and purchase amount until valid
+    while (true) {
+        customerName = prompt("Enter your name:");
+        amount = parseFloat(prompt("Enter your purchase amount:"));
+
+        // Check if the entered name is valid (non-empty and not a number)
+        if (!customerName.trim() || !isNaN(customerName)) {
+            alert("Invalid name. Please enter a valid name.");
+            continue;
+        }
+
+        // Check if the entered amount is valid (greater than 0)
+        if (isNaN(amount) || amount <= 0) {
+            alert("Invalid amount. Please enter a valid amount greater than 0.");
+            continue;
+        }
+        
+        // Exit loop if both name and amount are valid
+        break; 
     }
+
 
     // Calculate bonus points
     let bonusPoints = Math.floor(calculateBonus(amount));
