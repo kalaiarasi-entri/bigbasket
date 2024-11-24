@@ -74,14 +74,10 @@ function selectVoucher(bonusPoints) {
     let selectedVoucher;
     // Repeat until a valid voucher name is entered
     do {
-        let voucherMessage 
-        console.log(voucherNames.length);
-        if(voucherNames.length>1){
-            voucherMessage  = 'Available vouchers: ' + voucherNames.join(', ');
-        }
-        else{
-            voucherMessage = 'Available vouchers: ' + voucherNames[0];
-        }
+        let voucherMessage;
+        //set voucher message based on points
+        voucherMessage = `Available vouchers: ${voucherNames.length > 1 ? voucherNames.join(', ') : voucherNames[0]}`;
+
         let userInput = prompt(voucherMessage + '\nEnter the voucher name you want to redeem (e.g., GIFT50):');
 
         if (voucherNames.includes(userInput)) {
