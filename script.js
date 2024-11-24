@@ -10,7 +10,6 @@ try {
     // Get value of username and purchase amount until valid
     while (true) {
         customerName = prompt("Enter your name:");
-        amount = parseFloat(prompt("Enter your purchase amount:"));
 
         // Check if the entered name is valid (non-empty and not a number)
         if (!customerName.trim() || !isNaN(customerName)) {
@@ -18,14 +17,16 @@ try {
             continue;
         }
 
+        amount = parseFloat(prompt("Enter your purchase amount:"));
+
         // Check if the entered amount is valid (greater than 0)
         if (isNaN(amount) || amount <= 0) {
             alert("Invalid amount. Please enter a valid amount greater than 0.");
             continue;
         }
-        
+
         // Exit loop if both name and amount are valid
-        break; 
+        break;
     }
 
 
@@ -35,13 +36,13 @@ try {
     if (bonusPoints > 0) {
 
         // Show bonus points to user through alert
-        alert(`${customerName}, you have ${bonusPoints} bonus points.`);
+        alert(`${customerName}, you have earned ${bonusPoints} bonus points.`);
 
         // Select a voucher and calculate the final amount
         let pointsToRedeem = selectVoucher(bonusPoints);
         //Reduce points from deducted points
         bonusPoints -= pointsToRedeem;
-        
+
         //calculate the final amount reduced from actual amount using voucher points
         let finalAmount = redeemPoints(amount, pointsToRedeem);
 
@@ -50,7 +51,7 @@ try {
 
 } catch (error) {
     // show message to user to run in browser
-    console.error(error.message); 
+    console.error(error.message);
 }
 
 
@@ -58,7 +59,7 @@ try {
 function calculateBonus(amount) {
     let bonusPercentage;
     if (amount < 100) {
-        alert("Thanks for visiting store . Please purchase amount more than 100rs to earn bonus points");
+        alert("Thanks for visiting store . Please purchase amount more than 100 rupees to earn bonus points");
         return 0;
     }
     if (amount >= 2500) {
@@ -79,11 +80,11 @@ function selectVoucher(bonusPoints) {
     // Generate voucher options 50%, 75%, and 100% of bonus points
     let percentageLevels = [0.50, 0.75, 1.0];
     let voucherNames = [];
-    if(bonusPoints>=75){
+    if (bonusPoints >= 75) {
         voucherNames = percentageLevels.map(function (percent) {
-        return 'GIFT' + Math.floor(bonusPoints * percent);
-    });
-    }else{
+            return 'GIFT' + Math.floor(bonusPoints * percent);
+        });
+    } else {
         voucherNames.push('GIFT' + bonusPoints)
     }
 
@@ -102,10 +103,10 @@ function selectVoucher(bonusPoints) {
         } else {
             alert('Invalid voucher name. Please enter a valid voucher name from the list.');
         }
-    } while (!selectedVoucher);  
-    
+    } while (!selectedVoucher);
+
     // Return the points of the selected voucher
-    return selectedVoucher; 
+    return selectedVoucher;
 }
 
 // Function to redeem points and calculate the final amount
